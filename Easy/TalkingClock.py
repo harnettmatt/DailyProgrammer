@@ -28,3 +28,33 @@
 # It's two oh one pm
 # It's eight twenty nine pm
 # It's nine pm
+
+zero_to_nineteen = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eightteen", "nineteen"]
+tens = ["", "", "twenty", "thirty", "fourty", "fifty"]
+
+abrv = "am"
+time = input("Enter a valid military time: ")
+time = time.split(":")
+hours = int(time[0])
+mins = int(time[1])
+
+# check if it is the afternoon and covert out of military time
+if hours >= 12:
+    abrv = "pm"
+    hours = hours % 12
+
+# convert 00:xx to 12:xx
+if hours == 0:
+    hours = 12
+
+hours_str = zero_to_nineteen[hours]
+
+if 0 < mins < 10:
+    mins_str = "oh " + zero_to_nineteen[mins]
+elif mins < 20:
+    mins_str = zero_to_nineteen[mins]
+else:
+    mins_arr = [int(d) for d in str(mins)]
+    mins_str = tens[mins_arr[0]] + " " + zero_to_nineteen[mins_arr[1]]
+
+print("It's " + hours_str + " " + mins_str + " " + abrv)
